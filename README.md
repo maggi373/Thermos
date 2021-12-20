@@ -13,7 +13,7 @@ log4j2 status
 
 | Thorfusion / maggi373 patched     | Fixed              |
 |-----------------------------------|--------------------|
-| Thermos mitigated but not patched | :heavy_check_mark: |
+| Thermos mitigated patched         | :heavy_check_mark: |
 | Forge mitigated but not patched   | :heavy_check_mark: |
 | Bukkit not patched yet            | :x:                |
 
