@@ -5,17 +5,23 @@ https://github.com/FinalCraftMC/RecurrentComplex/releases
 
 log4j2 status
 
-| Original                                                             |     |
-|----------------------------------------------------------------------|-----|
-| Forge servers crashes on several codes, tries to run the code but it has an incorrect log4j setup causing it to crash | :x: |
-| Spigot run the codes and hangs                                       | :x: |
-| Thermos run the codes and hangs                                      | :x: |
+| Original                                                             | Fixed              |
+|----------------------------------------------------------------------|--------------------|
+| Forge servers crashes on several codes, tries to run the code but it has an incorrect log4j setup causing it to crash | :x:                |
+| Spigot run the codes and hangs                                       | :x:                |
+| Thermos run the codes and hangs                                      | :x:                |
 
-| Thorfusion / maggi373 patched     |                    |
+| Thorfusion / maggi373 patched     | Fixed              |
 |-----------------------------------|--------------------|
 | Thermos mitigated but not patched | :heavy_check_mark: |
 | Forge mitigated but not patched   | :heavy_check_mark: |
 | Bukkit not patched yet            | :x:                |
+
+| CVE STATUS                        | Fixed              |
+|-----------------------------------|--------------------|
+| CVE-2021-45046                    | N/A                |
+| CVE-2021-44228                    | :heavy_check_mark: |
+| CVE-2021-4104                     | :x:                |
 
 ---
 
