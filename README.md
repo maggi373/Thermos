@@ -1,5 +1,7 @@
 # Note
-This fork is my attempt to get Thermos up and running (again) for a local FeedTheBeast server. It may, or may not, work at all.
+Crashes?
+If you have recurrect complex, get this patch
+https://github.com/FinalCraftMC/RecurrentComplex/releases
 
 ---
 
