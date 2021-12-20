@@ -3,15 +3,17 @@ Crashes?
 If you have recurrent complex, get this patch
 https://github.com/FinalCraftMC/RecurrentComplex/releases
 
-Original
-Forge servers crashes on several codes, probably run the code aswell    :x:
-Spigot run the codes and hangs                                          :x:
-Thermos run the codes and hangs                                         :x:
+| Original                                                             |     |
+|----------------------------------------------------------------------|-----|
+| Forge servers crashes on several codes, probably run the code aswell | :x: |
+| Spigot run the codes and hangs                                       | :x: |
+| Thermos run the codes and hangs                                      | :x: |
 
-Thorfusion / maggi373 patched
-Thermos mitigated but not patched                                       :heavy_check_mark
-Forge mitigated but not patched                                         :heavy_check_mark
-Bukkit not patched yet                                                  :x:
+| Thorfusion / maggi373 patched     |                    |
+|-----------------------------------|--------------------|
+| Thermos mitigated but not patched | :heavy_check_mark: |
+| Forge mitigated but not patched   | :heavy_check_mark: |
+| Bukkit not patched yet            | :x:                |
 
 ---
 
