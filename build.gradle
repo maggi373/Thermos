@@ -5,8 +5,8 @@ import thermos.VersionParser
 buildscript {
     repositories {
         maven {
-            name 'forge'
-            url 'http://files.minecraftforge.net/maven/'
+            name = "forge"
+            url = "https://maven.minecraftforge.net/"
         }
         flatDir {
 			dirs 'libraries'
@@ -25,7 +25,7 @@ tasks.whenTaskAdded {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.8'
+    gradleVersion = '3.0'
 }
 
 apply plugin: 'maven'
@@ -37,7 +37,7 @@ repositories {
     clear()
     maven {
         name 'forge'
-        url 'https://files.minecraftforge.net/maven/'
+        url 'https://maven.minecraftforge.net/'
     }
     flatDir {
         dirs 'libraries'
@@ -277,7 +277,7 @@ repositories {
     clear()
     maven {
         name 'forge'
-        url 'http://files.minecraftforge.net/maven/'
+        url 'https://maven.minecraftforge.net/'
     }
     flatDir {
         dirs '../../libraries'
