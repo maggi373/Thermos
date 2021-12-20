@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" packages="net.minecraft,com.mojang">
+<Configuration status="WARN" packages="com.mojang.util">
     <Appenders>
         <Console name="FmlSysOut" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg%n" />
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger]: %replace{%msg}{(?i)\u00A7[0-9A-FK-OR]}{}%n" />
         </Console>
         <Console name="SysOut" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level]: %msg%n" />
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level]: %replace{%msg}{(?i)\u00A7[0-9A-FK-OR]}{}%n" />
         </Console>
-        <Queue name="TerminalConsole">
-           <PatternLayout pattern="[%d{HH:mm:ss} %level]: %msg%n" />
+        <Queue name="ServerGuiConsole" ignoreExceptions="true">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger]: %replace{%msg}{(?i)\u00A7[0-9A-FK-OR]}{}%n" />
         </Queue>
         <RollingRandomAccessFile name="File" fileName="logs/latest.log" filePattern="logs/%d{yyyy-MM-dd}-%i.log.gz">
-            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level]: %msg%n" />
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level]: %replace{%msg}{(?i)\u00A7[0-9A-FK-OR]}{}%n" />
             <Policies>
                 <TimeBasedTriggeringPolicy />
                 <OnStartupTriggeringPolicy />
@@ -21,7 +21,7 @@
             <Routes pattern="$${ctx:side}">
                 <Route>
                     <RollingRandomAccessFile name="FmlFile" fileName="logs/fml-${ctx:side}-latest.log" filePattern="logs/fml-${ctx:side}-%i.log">
-                        <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger/%X{mod}]: %msg%n" />
+                        <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger/%X{mod}]: %replace{%msg}{(?i)\u00A7[0-9A-FK-OR]}{}%n" />
                         <DefaultRolloverStrategy max="3" fileIndex="max" />
                         <Policies>
                             <OnStartupTriggeringPolicy />
@@ -30,33 +30,35 @@
                 </Route>
                 <Route key="$${ctx:side}">
                     <RandomAccessFile name="FmlFile" fileName="logs/fml-junk-earlystartup.log" >
-                        <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg%n" />
+                        <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger]: %replace{%msg}{(?i)\u00A7[0-9A-FK-OR]}{}%n" />
                     </RandomAccessFile>
                 </Route>
             </Routes>
         </Routing>
     </Appenders>
     <Loggers>
-        <!-- Redirect all logging from FML to fml log files -->	
-        <Logger level="all" name="cpw.mods" additivity="false">
-            <AppenderRef ref="FmlFile"/>
-        </Logger>
         <Logger level="info" name="com.mojang" additivity="false">
-            <AppenderRef ref="TerminalConsole" level="INFO" />
+            <AppenderRef ref="SysOut" level="INFO" />
             <AppenderRef ref="File" />
+            <AppenderRef ref="ServerGuiConsole" level="INFO" />
         </Logger>
         <Logger level="info" name="net.minecraft" additivity="false">
             <filters>
                 <MarkerFilter marker="NETWORK_PACKETS" onMatch="DENY" onMismatch="NEUTRAL" />
+                <RegexFilter regex=".*\$\{[^}]*\}.*" onMatch="DENY" onMismatch="NEUTRAL"/>
             </filters>
-			<AppenderRef ref="TerminalConsole" level="INFO" />
+            <AppenderRef ref="SysOut" level="INFO" />
             <AppenderRef ref="File" />
+            <AppenderRef ref="ServerGuiConsole" level="INFO" />
         </Logger>
-        <Root level="all" >
-            <AppenderRef ref="TerminalConsole" level="INFO" />
-            <AppenderRef ref="File" level="INFO" />
-			<!-- Set FmlFile to TRACE/DEBUG if you require more logging -->
-			<AppenderRef ref="FmlFile" level="INFO" />
+        <Root level="all">
+	    <filters>
+                <MarkerFilter marker="NETWORK_PACKETS" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <RegexFilter regex=".*\$\{[^}]*\}.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </filters>
+            <AppenderRef ref="FmlSysOut" level="INFO" />
+            <AppenderRef ref="ServerGuiConsole" level="INFO" />
+            <AppenderRef ref="FmlFile"/>
         </Root>
     </Loggers>
 </Configuration>
