@@ -7,7 +7,7 @@ log4j2 status
 
 | Original                                                             |     |
 |----------------------------------------------------------------------|-----|
-| Forge servers crashes on several codes, probably run the code aswell | :x: |
+| Forge servers crashes on several codes, tries to run the code but it has an incorrect log4j setup causing it to crash | :x: |
 | Spigot run the codes and hangs                                       | :x: |
 | Thermos run the codes and hangs                                      | :x: |
 
