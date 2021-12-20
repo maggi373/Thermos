@@ -37,8 +37,13 @@
         </Routing>
     </Appenders>
     <Loggers>
+        <!-- Redirect all logging from FML to fml log files -->
+        <Logger level="all" name="cpw.mods" additivity="false">
+            <AppenderRef ref="FmlFile"/>
+        </Logger>
         <Logger level="info" name="com.mojang" additivity="false">
             <AppenderRef ref="SysOut" level="INFO" />
+            <AppenderRef ref="TerminalConsole" level="INFO" />
             <AppenderRef ref="File" />
             <AppenderRef ref="ServerGuiConsole" level="INFO" />
         </Logger>
@@ -48,6 +53,7 @@
                 <RegexFilter regex=".*\$\{[^}]*\}.*" onMatch="DENY" onMismatch="NEUTRAL"/>
             </filters>
             <AppenderRef ref="SysOut" level="INFO" />
+            <AppenderRef ref="TerminalConsole" level="INFO" />
             <AppenderRef ref="File" />
             <AppenderRef ref="ServerGuiConsole" level="INFO" />
         </Logger>
@@ -58,7 +64,10 @@
             </filters>
             <AppenderRef ref="FmlSysOut" level="INFO" />
             <AppenderRef ref="ServerGuiConsole" level="INFO" />
-            <AppenderRef ref="FmlFile"/>
+            <AppenderRef ref="TerminalConsole" level="INFO" />
+            <AppenderRef ref="File" level="INFO" />
+            <!-- Set FmlFile to TRACE/DEBUG if you require more logging -->
+            <AppenderRef ref="FmlFile" level="INFO" />
         </Root>
     </Loggers>
 </Configuration>
