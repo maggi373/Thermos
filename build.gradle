@@ -29,7 +29,7 @@ tasks.whenTaskAdded {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.0'
+    gradleVersion = '2.8'
 }
 
 apply plugin: 'maven'
