@@ -3,6 +3,8 @@ Crashes?
 If you have recurrent complex, get this patch
 https://github.com/FinalCraftMC/RecurrentComplex/releases
 
+log4j2 status
+
 | Original                                                             |     |
 |----------------------------------------------------------------------|-----|
 | Forge servers crashes on several codes, probably run the code aswell | :x: |
