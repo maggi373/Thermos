@@ -19,7 +19,7 @@ log4j2 status
 
 | CVE STATUS                        | Fixed              |
 |-----------------------------------|--------------------|
-| CVE-2021-45046                    | N/A                |
+| (CVE-2021-45046)                  | N/A                |
 | CVE-2021-44228                    | :heavy_check_mark: |
 | CVE-2021-4104                     | Should not work    |
 
