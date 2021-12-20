@@ -1,4 +1,4 @@
-# Note
+# Terralization patched version of Thermos
 Crashes?
 If you have recurrent complex, get this patch
 https://github.com/FinalCraftMC/RecurrentComplex/releases
