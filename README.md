@@ -1,11 +1,13 @@
 # Terralization patched version of Thermos
-Crashes?
+
+### Crashes?
+
 If you have recurrent complex, get this patch
 https://github.com/FinalCraftMC/RecurrentComplex/releases
 
 ![Thermos](thermos_icon.png)
 
-log4j2 status
+## log4j2 status
 
 | Original                                                             | Fixed              |
 |----------------------------------------------------------------------|--------------------|
