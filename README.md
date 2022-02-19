@@ -1,4 +1,5 @@
-# Terralization patched version of Thermos
+# Thorfusion's patched version of Thermos
+Made for Terralization modpack
 
 ### Crashes?
 Some modpacks might require patched versions of certain mods to work with this version of thermos
@@ -7,7 +8,7 @@ If you have recurrent complex in you pack, you need to use this patched version 
 https://github.com/Thorfusion/RecurrentComplex
 
 If you have MobiusCore in your pack, you need to use this patched version of mobiuscore on the server
-https://github.com/Thorfusion/MobiusCoreTH/tree/master
+https://github.com/Thorfusion/MobiusCoreTH
 
 ![Thermos](thermos_icon.png)
 
@@ -33,17 +34,6 @@ https://github.com/Thorfusion/MobiusCoreTH/tree/master
 
 ---
 
-# Thermos 1.7.10
-
-![Thermos](thermos_icon.png)
-<!--- ![Graph](http://i.mcstats.org/Thermos/Global+Statistics@2x.borderless.png) --->
-
-[![Build Status](https://api.travis-ci.com/jefgen/Thermos.svg?branch=1.7.10)](https://api.travis-ci.com/jefgen/Thermos)
-![Minecraft Forge v10.13.4.1614][forge]
-![Minecraft v1.7.10][mc]
-![Java JDK v1.8][java]
-![Spigot 1.7.10 Snapshot ][spigot]
-
 ### What's Thermos?
 Thermos is a fork of KCauldron, a craftbukkit forge server for Minecraft 1.7.10. After periods of inactivity on KCauldron's GitLab concerning major issues, Thermos was created to allow active members of the Minecraft coding community to optimize it and provide fixes in a timely manner.
 
@@ -54,24 +44,16 @@ Advantages over KCauldron:
 + Better world protection (Forge stuff doesn't bypass Bukkit plugins!)
 + Many patches that KCauldron didn't get from Spigot
 + Dupe glitch fixes
-
-## Downloads
-**Thermos is still in beta and you may encounter issues in using it with your server. You have been warned!**
-
-P.S. **PLEASE** look at the release notes before downloading! :smile:
-
-## Donate/Support
-
-N\A
++ Log4j patch
 
 ## Build Requirements
-* Java 8u101 JDK or higher
+* Java 8u292 JDK or higher
 * `JAVA_HOME` defined on your OS
 
-## Building Terminal-Access/Thermos
+## Building Thorfusion/Thermos
 * Checkout project
   * You can use IDE or clone from console:
-  `git clone https://github.com/mcimaginarium/Thermos.git`
+  `git clone https://github.com/Thorfusion/Thermos.git`
 * Setup
   * Auto: `setup.sh`
   * Manual:
@@ -90,23 +72,3 @@ All builds will be in `build/distributions`
   * `git pull origin master`
 * Re apply patches & build binaries
   * `./gradlew clean setupCauldron jar`
-
-## Known Caveats, use provided fixes at your own risk.
-
-✔ BungeeCord: It's been known for years that BungeeCord barely works with Forge & seems that it'll never be supported officially. [Fixed]
-
-✔ BuyCraftX: Doesn't seem to work with Thermos, info on why it doesn't is unknown currently. [Fixed]
-
-✔ Citizens: Not compatible with forge [Fixed]
-
-✖ Lilypad: 100% not compatible with Forge, lead developer has declined to add support when asked.
-
-✔ Mobius / Opis: You can download fixed version [HERE](https://cdn.discordapp.com/attachments/172072987154055168/186577486593785857/MobiusCore-1.2.5-Thermos.jar)
-
-✔ SkinsRestorer: Latest working version is 10.4.4
-
-[Fixed]: http://gogs.tcpr.ca/TCPR/Fixes "Fixed"
-[forge]: https://img.shields.io/badge/Minecraft%20Forge-v10.13.4.1614-green.svg "Minecraft Forge v10.13.4.1614"
-[mc]: https://img.shields.io/badge/Minecraft-v1.7.10-green.svg "Minecraft 1.7.10"
-[java]: https://img.shields.io/badge/Java%20JDK-v1.8-blue.svg "Java JDK 8"
-[spigot]: https://img.shields.io/badge/Spigot-v1.7.10--R0.1--SNAPSHOT-lightgrey.svg "Spigot R0.1 Snapshot"
