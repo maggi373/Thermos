@@ -1,21 +1,9 @@
 # Thorfusion's patched version of Thermos
 Made for Terralization modpack
 
-![Thermos](thermos_icon.png)
+![Thermos](thermos_iconhalfx.png)
 
 ## log4j2 status
-
-| Original Server | Fixed | Comment                                                                                                         |
-|-----------------|-------|-----------------------------------------------------------------------------------------------------------------|
-| Forge           | :x:   | servers crashes on several codes, tries to run the code but it has an incorrect log4j setup causing it to crash |
-| Spigot/Bukkit   | :x:   | run the codes and hangs                                                                                         |
-| Thermos         | :x:   | run the codes and hangs                                                                                         |
-
-| Thorfusion / maggi373 patched | Fixed              | Comment                   |
-|-------------------------------|--------------------|---------------------------|
-| Forge                         | :heavy_check_mark: | mitigated but not patched |
-| Spigot/Bukkit                 | :x:                | bukkit not patched yet    |
-| Thermos                       | :heavy_check_mark: | mitigated and patched     |
 
 | CVE STATUS                        | Fixed              |
 |-----------------------------------|--------------------|
