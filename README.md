@@ -1,9 +1,13 @@
 # Terralization patched version of Thermos
 
 ### Crashes?
+Some modpacks might require patched versions of certain mods to work with this version of thermos
 
-If you have recurrent complex, get this patch
-https://github.com/FinalCraftMC/RecurrentComplex/releases
+If you have recurrent complex in you pack, you need to use this patched version of recurrent complex
+https://github.com/Thorfusion/RecurrentComplex
+
+If you have MobiusCore in your pack, you need to use this patched version of mobiuscore on the server
+https://github.com/Thorfusion/MobiusCoreTH/tree/master
 
 ![Thermos](thermos_icon.png)
 
