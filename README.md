@@ -1,13 +1,6 @@
 # Thorfusion's patched version of Thermos
 Made for Terralization modpack
 
-### Crashes?
-Some modpacks might require patched versions of certain mods to work with this version of thermos
-
-[Recurrent Complex](https://github.com/Thorfusion/RecurrentComplex)
-
-[MobiusCore](https://github.com/Thorfusion/MobiusCoreTH)
-
 ![Thermos](thermos_icon.png)
 
 ## log4j2 status
@@ -29,6 +22,14 @@ Some modpacks might require patched versions of certain mods to work with this v
 | CVE-2021-45046                    | N/A                |
 | CVE-2021-44228                    | :heavy_check_mark: |
 | CVE-2021-4104                     | Should not work    |
+
+---
+
+### Crashes?
+Some modpacks might require patched versions of certain mods to work with this version of thermos
+
++ [Recurrent Complex](https://github.com/Thorfusion/RecurrentComplex)
++ [MobiusCore](https://github.com/Thorfusion/MobiusCoreTH)
 
 ---
 
