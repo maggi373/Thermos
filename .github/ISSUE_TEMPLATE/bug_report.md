@@ -7,29 +7,24 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+You will receive NO SUPPORT if you do not follow the template below.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**Server Log:** *(Use [Pastebin](http://pastebin.com/) or [Github Gist](https://gist.github.com/))*
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**FML Log(s):** *(Use [Pastebin](http://pastebin.com/) or [Github Gist](https://gist.github.com/))*
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Explanation of issue:**
 
-**Desktop (please complete the following information):**
- - OS: 
- - Modpack:
- - Modpack Version:
- - Mekanism Version: 
- - Forge Version:
+**How to recreate this issue:**
 
+**Modpack Name:** *(Only if public)*
 
-**Additional context**
-Add any other context about the problem here.
+**Mods Installed:**
+
+**Plugins Installed:**
+
+**Warmroast Report:** *(Optional)*
+
+**Thermos Version:**
+
+**Forge Version:**

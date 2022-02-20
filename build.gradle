@@ -1,5 +1,3 @@
-import groovy.json.JsonSlurper
-import thermos.CreateChangelog
 import thermos.VersionParser
 
 buildscript {
@@ -11,8 +9,19 @@ buildscript {
         flatDir {
 			dirs 'libraries'
 		}
-        mavenCentral()
-        mavenLocal()
+        maven {
+            name 'spigot'
+            url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+        }
+        maven {
+            name 'prok'
+            url 'https://repo.prok.pw/'
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven { url = "https://repo1.maven.org/maven2/" }
     }
     dependencies {
 //        classpath files('FGS.jar')
@@ -20,22 +29,8 @@ buildscript {
     }
 }
 
-// Note for myself to add
-// Exclude a Log4j class well-known for its use in recent security exploits.
-//    exclude 'org/apache/logging/log4j/core/lookup/JndiLookup.class'
-
-tasks.whenTaskAdded {
-    if (it.name.startsWith('publish')) it.dependsOn 'preparePublication'
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.8'
-}
-
 apply plugin: 'maven'
 apply plugin: 'cauldron'
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
 
 repositories {
     clear()
@@ -46,12 +41,25 @@ repositories {
     flatDir {
         dirs 'libraries'
     }
-    mavenCentral()
-    mavenLocal()
+    maven {
+        name 'spigot'
+        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+    maven {
+        name 'prok'
+        url 'https://repo.prok.pw/'
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+    maven { url = "https://repo1.maven.org/maven2/" }
 }
 
+archivesBaseName = "Thermos"
+
 minecraft {
-    version = '1.7.10'
+    version = "1.7.10"
     mcpVersion = '9.08'
     mainClass = 'cpw.mods.fml.relauncher.ServerLaunchWrapper'
     tweakClass = 'cpw.mods.fml.common.launcher.FMLTweaker'
@@ -59,21 +67,21 @@ minecraft {
     srgExtra "PK: org/bukkit/craftbukkit org/bukkit/craftbukkit/v1_7_R4"
 }
 
-group = 'MooseCraft'
+group = 'Thorfusion'
 
-ext.buildInfoCached = null;
+ext.buildInfoCached = null
 
 def buildInfo(String key) {
     if (!buildInfoCached) {
         buildInfoCached = [
-                nextBuildNumber: 'UNOFFICIAL',
-                version        : 'NONE'
+                nextBuildNumber: 'Thorfusion',
+                version        : 'R62'
         ]
     }
-    return key ? buildInfoCached[key] : buildInfoCached;
+    return key ? buildInfoCached[key] : buildInfoCached
 }
 
-ext.gitInfoCached = null;
+ext.gitInfoCached = null
 
 def gitInfo(String key) {
     if (!gitInfoCached) {
@@ -93,7 +101,7 @@ def gitInfo(String key) {
             ]
         }
     }
-    return key ? gitInfoCached[key] : gitInfoCached;
+    return key ? gitInfoCached[key] : gitInfoCached
 }
 
 ext.mcVersion = "1.7.10"
@@ -158,6 +166,7 @@ dependencies {
 	libraries 'java3d:vecmath:1.3.1'
 }
 
+
 packageUniversal {
     from { configurations.exported.collect { it.isDirectory() ? it : zipTree(it) } }
 }
@@ -186,7 +195,7 @@ def generateManifest() {
             'Thermos-Group'         : project.group,
             'Thermos-Channel'       : project.name,
             'Thermos-Version'       : project.version,
-            'Implementation-Vendor' : 'jefgen',
+            'Implementation-Vendor' : 'Thorfusion',
             'Implementation-Title'  : project.name,
             'Implementation-Version': project.version,
             'Specification-Vendor'  : 'Bukkit Team',
@@ -198,6 +207,7 @@ def generateManifest() {
             'Class-Path'            : generateClasspath()
     ]
 }
+
 
 tasks.packageUniversal {
     classifier = 'server'
@@ -211,18 +221,6 @@ task jar(type: Jar, dependsOn: packageUniversal) {
     manifest.attributes(generateManifest())
 }
 
-tasks.createChangelog.onlyIf { false }
-tasks.packageInstaller.onlyIf { false }
-
-task packageChangelog(type: CreateChangelog) {
-    onlyIf { project.hasProperty('officialBuild') }
-    classifier = 'changelog'
-    extension = 'txt'
-    oldChangelogUrl = "https://thermos.mcimaginarium.co.uk/changelog.txt"
-    hash = gitInfo('hash')
-    message = gitInfo('message')
-    version = project.version
-}
 
 task bundleStub(type: Jar) {
     classifier = 'stub'
@@ -239,41 +237,6 @@ task packageBundle(type: Zip) {
     rename bundleStub.archiveName, 'Thermos.jar'
 }
 
-task signJars(type: Sign, dependsOn: [packageUniversal, packageChangelog, packageBundle, jar, 'generatePomFileForMavenPublication']) {
-    sign packageUniversal
-    sign packageChangelog
-    sign packageBundle
-    sign jar
-}
-
-task signPom(type: Sign, dependsOn: 'generatePomFileForMavenPublication') {
-    outputs.upToDateWhen { false }
-    sign file("${buildDir}/publications/maven/pom-default.xml")
-}
-
-task preparePublication(dependsOn: [signJars, signPom]) {}
-
-def getPomSignature = {
-    return project.tasks.signPom.signatureFiles.collect { it }[0]
-}
-
-def getSignatureFiles = {
-    def allFiles = project.tasks.signJars.signatureFiles.collect { it }
-    def signedServer = allFiles.find { it.name.contains('-server') }
-    def signedChangelog = allFiles.find { it.name.contains('-changelog') }
-    def signedBundle = allFiles.find { it.name.contains('-bundle') }
-    def signedJar = (allFiles - [signedServer, signedChangelog, signedBundle])[0]
-    return [
-            [archive: signedServer, classifier: 'server', extension: 'jar.asc'],
-            [archive: signedChangelog, classifier: 'changelog', extension: 'txt.asc'],
-            [archive: signedBundle, classifier: 'bundle', extension: 'zip.asc'],
-            [archive: signedJar, classifier: null, extension: 'jar.asc']
-    ]
-}
-
-publishing {
-}
-
 tasks.generateProjectCauldron << {
     def file = new File('eclipse/cauldron/build.gradle')
     file.append('''
@@ -286,8 +249,7 @@ repositories {
     flatDir {
         dirs '../../libraries'
     }
-    mavenCentral()
-    mavenLocal()
+    maven { url = "https://repo1.maven.org/maven2/" }
 }
 dependencies {
 ''')
