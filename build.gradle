@@ -3,19 +3,15 @@ import thermos.VersionParser
 buildscript {
     repositories {
         maven {
-            name 'forge'
-            url 'https://maven.minecraftforge.net/'
+            name = "forge"
+            url = "https://maven.minecraftforge.net/"
         }
         flatDir {
 			dirs 'libraries'
 		}
         maven {
-            name 'spigot'
-            url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
-        }
-        maven {
-            name 'prok'
-            url 'https://repo.prok.pw/'
+            name = "spigot"
+            url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
         }
         maven {
             name = "sonatype"
@@ -35,19 +31,19 @@ apply plugin: 'cauldron'
 repositories {
     clear()
     maven {
-        name 'forge'
-        url 'https://maven.minecraftforge.net/'
+        name = "forge"
+        url = "https://maven.minecraftforge.net/"
     }
     flatDir {
         dirs 'libraries'
     }
     maven {
-        name 'spigot'
-        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+        name = "spigot"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
     }
     maven {
-        name 'prok'
-        url 'https://repo.prok.pw/'
+        name = "minecraft"
+        url = "https://libraries.minecraft.net/"
     }
     maven {
         name = "sonatype"
@@ -246,11 +242,15 @@ tasks.generateProjectCauldron << {
 repositories {
     clear()
     maven {
-        name 'forge'
-        url 'https://maven.minecraftforge.net/'
+        name = "forge"
+        url = "https://maven.minecraftforge.net/"
     }
     flatDir {
         dirs '../../libraries'
+    }
+    maven {
+        name = "minecraft"
+        url = "https://libraries.minecraft.net/"
     }
     maven { url = "https://repo1.maven.org/maven2/" }
 }
