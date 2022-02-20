@@ -237,6 +237,9 @@ task packageBundle(type: Zip) {
     rename bundleStub.archiveName, 'Thermos.jar'
 }
 
+tasks.createChangelog.onlyIf { false }
+tasks.packageInstaller.onlyIf { false }
+
 tasks.generateProjectCauldron << {
     def file = new File('eclipse/cauldron/build.gradle')
     file.append('''
