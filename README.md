@@ -18,6 +18,7 @@ Some modpacks might require patched versions of certain mods to work with this v
 
 + [Recurrent Complex](https://github.com/Thorfusion/RecurrentComplex)
 + [MobiusCore](https://github.com/Thorfusion/MobiusCoreTH)
++ [An forked and updated version of Opis](https://github.com/GTNewHorizons/Opis/releases/tag/1.3.2-mapless)
 
 ---
 
