@@ -2,22 +2,13 @@ import thermos.VersionParser
 
 buildscript {
     repositories {
-        maven {
-            name = "forge"
-            url = "https://maven.minecraftforge.net/"
-        }
+    maven {
+        name 'central'
+        url 'https://maven.thorfusion.com/artifactory/central/'
+    }
         flatDir {
 			dirs 'libraries'
 		}
-        maven {
-            name = "spigot"
-            url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-        maven { url = "https://repo1.maven.org/maven2/" }
     }
     dependencies {
 //        classpath files('FGS.jar')
@@ -31,25 +22,12 @@ apply plugin: 'cauldron'
 repositories {
     clear()
     maven {
-        name = "forge"
-        url = "https://maven.minecraftforge.net/"
+        name 'central'
+        url 'https://maven.thorfusion.com/artifactory/central/'
     }
     flatDir {
         dirs 'libraries'
     }
-    maven {
-        name = "spigot"
-        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
-    }
-    maven {
-        name = "minecraft"
-        url = "https://libraries.minecraft.net/"
-    }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/repositories/snapshots/"
-    }
-    maven { url = "https://repo1.maven.org/maven2/" }
 }
 
 archivesBaseName = "Thermos"
