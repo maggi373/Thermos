@@ -220,17 +220,12 @@ tasks.generateProjectCauldron << {
 repositories {
     clear()
     maven {
-        name = "forge"
-        url = "https://maven.minecraftforge.net/"
+        name 'central'
+        url 'https://maven.thorfusion.com/artifactory/central/'
     }
     flatDir {
         dirs '../../libraries'
     }
-    maven {
-        name = "minecraft"
-        url = "https://libraries.minecraft.net/"
-    }
-    maven { url = "https://repo1.maven.org/maven2/" }
 }
 dependencies {
 ''')
