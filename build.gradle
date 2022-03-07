@@ -285,9 +285,8 @@ task packageBundle(type: Zip, dependsOn: installBundle) {
 tasks.createChangelog.onlyIf { false }
 tasks.packageInstaller.onlyIf { false }
 
-task signJars(type: Sign, dependsOn: [packageUniversal, packageChangelog, jar, installBundle, 'generatePomFileForMavenPublication']) {
+task signJars(type: Sign, dependsOn: [packageUniversal, jar, installBundle, 'generatePomFileForMavenPublication']) {
     sign packageUniversal
-    // sign packageChangelog
     sign jar
 }
 
