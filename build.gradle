@@ -285,6 +285,7 @@ task packageBundle(type: Zip, dependsOn: installBundle) {
 tasks.createChangelog.onlyIf { false }
 tasks.packageInstaller.onlyIf { false }
 
+/*
 task signJars(type: Sign, dependsOn: [packageUniversal, jar, installBundle, 'generatePomFileForMavenPublication']) {
     sign packageUniversal
     sign jar
@@ -320,7 +321,7 @@ def getSignatureFiles = {
 }
 publishing {
     repositories {
-	    /*
+	    //
         maven {
             name 'mcimaginarium'
             url 'sftp://repo.mcimaginarium.co.uk:21/maven/'
@@ -330,7 +331,7 @@ publishing {
                 password project.hasProperty('mcimaginariumPassword') ? mcimaginariumPassword : null
             }
         }
-	    */
+        //
         maven {
             url = mavenLocal()
         }
@@ -400,7 +401,7 @@ publishing {
         }
     }
 }
-
+*/
 
 tasks.generateProjectCauldron << {
     def file = new File('eclipse/cauldron/build.gradle')
