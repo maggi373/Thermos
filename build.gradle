@@ -2,7 +2,6 @@ import groovy.json.JsonSlurper
 import thermos.CreateChangelog
 import thermos.InstallBundle
 import thermos.VersionParser
-import thermos.VersionSetter
 
 tasks.whenTaskAdded {
     if (it.name.startsWith('publish')) it.dependsOn 'preparePublication'
@@ -64,7 +63,7 @@ def buildInfo(String key) {
     if (!buildInfoCached) {
         buildInfoCached = [
                 nextBuildNumber: 'Thorfusion',
-                version        : 'R62'
+                version        : 'R63'
         ]
     }
     return key ? buildInfoCached[key] : buildInfoCached;
@@ -92,12 +91,12 @@ def gitInfo(String key) {
     }
     return key ? gitInfoCached[key] : gitInfoCached;
 }
-
+/*
 public boolean isTravis() {
   String user = System.getProperty("user.name");
   return user.equals("travis");
 }
-
+*/
 def getGitBranch() {
     def branch = gitInfo("branch")
     if (branch.equals("master")) {
@@ -210,7 +209,7 @@ def generateManifest(boolean legacy = false) {
 			'Thermos-Revision'      : project.nextRevisionNumber,
             'Thermos-Legacy'        : legacy,
 			'Thermos-Official'      : isOfficial(),
-            'Implementation-Vendor' : 'MCImaginarium',
+            'Implementation-Vendor' : 'Thorfusion',
             'Implementation-Title'  : project.name,
             'Implementation-Version': '1.7.10-R0.1-SNAPSHOT',
             'Specification-Vendor'  : 'Bukkit Team',
@@ -221,12 +220,6 @@ def generateManifest(boolean legacy = false) {
             'Main-Class'            : 'cpw.mods.fml.relauncher.ServerLaunchWrapper',
             'Class-Path'            : generateClasspath(legacy)
     ]
-}
-
-task setForgeBuildNumber(type: VersionSetter) {
-	forgeBuild forgeBuildNumber
-	forgeVersionFile = file('forge/src/main/java/net/minecraftforge/common/ForgeVersion.java')
-	forgeModLoaderVersionFile = file('src/main/resources/fmlversion.properties')
 }
 
 tasks.packageUniversal {
@@ -244,6 +237,7 @@ task jar(type: Jar, dependsOn: packageUniversal) {
 tasks.createChangelog.onlyIf { false }
 tasks.packageInstaller.onlyIf { false }
 
+/*
 task packageChangelog(type: CreateChangelog) {
     onlyIf { project.hasProperty('officialBuild') }
     classifier = 'changelog'
@@ -265,6 +259,7 @@ task api(type: Zip, dependsOn: packageUniversal) {
         exclude ("org/bukkit/craftbukkit/**")
     }
 }
+*/
 
 task bundleStub(type: Jar) {
     classifier = 'stub'
@@ -304,6 +299,7 @@ tasks.withType(Zip) { task ->
     }
 }
 
+/*
 task signPom(type: Sign, dependsOn: 'generatePomFileForMavenPublication') {
     outputs.upToDateWhen { false }
     sign file("${buildDir}/publications/maven/pom-default.xml")
@@ -324,7 +320,6 @@ def getSignatureFiles = {
             [archive: signedJar, classifier: null, extension: 'jar.asc']
     ]
 }
- 
 publishing {
     repositories {
 	    /*
@@ -407,6 +402,7 @@ publishing {
         }
     }
 }
+*/
 
 tasks.generateProjectCauldron << {
     def file = new File('eclipse/cauldron/build.gradle')
