@@ -287,7 +287,7 @@ tasks.packageInstaller.onlyIf { false }
 
 task signJars(type: Sign, dependsOn: [packageUniversal, packageChangelog, jar, installBundle, 'generatePomFileForMavenPublication']) {
     sign packageUniversal
-    sign packageChangelog
+    // sign packageChangelog
     sign jar
 }
 
