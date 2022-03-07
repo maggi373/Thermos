@@ -22,6 +22,7 @@ Some modpacks might require patched versions of certain mods to work with this v
 
 ---
 
+
 ### What's Thermos?
 Thermos is a fork of KCauldron, a craftbukkit forge server for Minecraft 1.7.10. After periods of inactivity on KCauldron's GitLab concerning major issues, Thermos was created to allow active members of the Minecraft coding community to optimize it and provide fixes in a timely manner.
 
@@ -33,30 +34,37 @@ Advantages over KCauldron:
 + Many patches that KCauldron didn't get from Spigot
 + Dupe glitch fixes
 + Log4j patch
+---
 
+## Installation
+Click [here](https://thorfusion.com/Thermos/install)
+
+---
+## Downloads
+You can download the pre-built packages from [here](https://github.com/thorfusion/Thermos/releases). 
+
+**Thermos is still in beta and you may encounter issues in using it with your server. You have been warned!**
+
+P.S. **PLEASE** look at the release notes before downloading! :smile:
+
+---
 ## Build Requirements
 * Java 8u292 JDK or higher
 * `JAVA_HOME` defined on your OS
 
-## Building Thorfusion/Thermos
+---
+## Setup the Workspace
 * Checkout project
   * You can use IDE or clone from console:
-  `git clone https://github.com/Thorfusion/Thermos.git`
-* Setup
-  * Auto: `setup.sh`
-  * Manual:
-  `git submodule update --init --recursive`
-* Build
-  * This process downloads minecraft and apply patches
-  * If you have gradle integration in IDE - you can still use gui
-  * Auto: `build.sh`
-  * Manual:
-  `./gradlew setupCauldron jar`
-
+  `git clone --recurse-submodules https://github.com/thorfusion/Thermos.git`
+* Creating the workspace
+  * To create the workspace just run the command: `./gradlew -PforgeBuildNumber='1614' setupCauldron`
+  * To create the patches with the changes made just run: `./gradlew -PforgeBuildNumber='1614' genPatches`
+* Building
+  * Before you can build you must first setup the workspace!
+  * To build just run the command: `./gradlew -PforgeBuildNumber='1614' installbundle`
+  * All builds will be in `build/distributions`
+* Updating sources
+  * Update sources: `git pull origin master`
+  * Recreate the workspace: `./gradlew -PforgeBuildNumber='1614' clean setupCrucible`
 All builds will be in `build/distributions`
-  
-## Updating sources
-* Update sources
-  * `git pull origin master`
-* Re apply patches & build binaries
-  * `./gradlew clean setupCauldron jar`

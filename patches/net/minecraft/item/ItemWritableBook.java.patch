@@ -8,57 +8,30 @@
  import net.minecraft.world.World;
  
  public class ItemWritableBook extends Item
-@@ -25,6 +26,49 @@
+@@ -25,6 +26,22 @@
          return true;
      }
  
-+    public static boolean shadowUpdate(ItemStack stack, ItemStack  push, boolean isSigning)
-+    {
-+        if (isSigning)
-+        {
-+            if(push.getTagCompound().hasKey("title"))
-+                stack.setTagInfo("title", new NBTTagString(push.getTagCompound().getString("title")));
++    // Rus-Minecraft: compound update
++    public static boolean shadowUpdate(ItemStack stack, ItemStack push, boolean isSigning) {
++        NBTTagCompound pushNBT = push.hasTagCompound() ? push.getTagCompound() : new NBTTagCompound();
++        NBTTagCompound stackNBT = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
++        if (isSigning) {
++            if (pushNBT.hasKey("title"))
++                stackNBT.setTag("title", pushNBT.getTag("title"));
++            if (pushNBT.hasKey("author"))
++                stackNBT.setTag("author", pushNBT.getTag("author"));
 +        }
-+        if (push.getTagCompound().hasKey("pages",8))
-+            stack.setTagInfo("pages", push.getTagCompound().getTagList("pages", 8));
++        if (pushNBT.hasKey("pages"))
++            stackNBT.setTag("pages", pushNBT.getTag("pages"));
++        stack.setTagCompound(stackNBT);
 +        return true;
-+        /*if (this.hasTagCompound() && par1.hasTagCompound())
-+        {
-+            NBTTagCompound nbttagcompound = this.getTagCompound();
-+            NBTTagCompound nbttagcompound1 = par1.getTagCompound();
-+            if (nbttagcompound1.hasKey("pages"))
-+                nbttagcompound.setTag("pages", nbttagcompound1.getTag("pages"));
-+            if (isSigning)
-+            {
-+                if (nbttagcompound1.hasKey("title"))
-+                {
-+                    nbttagcompound.setTag("title", nbttagcompound1.getTag("title"));
-+                }
-+                if (nbttagcompound1.hasKey("author"))
-+                    nbttagcompound.setTag("author", nbttagcompound1.getTag("author"));
-+            }
-+        }
-+        else if(par1.hasTagCompound())
-+        {
-+            NBTTagCompound nbttagcompound1 = par1.getTagCompound();
-+            if (nbttagcompound1.hasKey("pages"))
-+                this.setTagInfo("pages", nbttagcompound1.getTag("pages"));
-+            if (isSigning)
-+            {
-+                if (nbttagcompound1.hasKey("title"))
-+                {
-+                    this.setTagInfo("title", nbttagcompound1.getTag("title"));
-+                }
-+                if (nbttagcompound1.hasKey("author"))
-+                    this.setTagInfo("author", nbttagcompound1.getTag("author"));
-+            }
-+        }*/
 +    }
 +
      public static boolean func_150930_a(NBTTagCompound p_150930_0_)
      {
          if (p_150930_0_ == null)
-@@ -43,15 +87,10 @@
+@@ -43,15 +60,10 @@
              {
                  String s = nbttaglist.getStringTagAt(i);
  

@@ -14,6 +14,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 
+import thermos.updater.CommandSenderUpdateCallback;
+import thermos.updater.TVersionRetriever;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
@@ -29,12 +31,13 @@ public class ThermosCommand extends Command {
     public static final String TPS = NAME + ".tps";
     public static final String RESTART = NAME + ".restart";
     public static final String DUMP = NAME + ".dump";
-
+    public static final String UPDATE = NAME + ".update";
     public ThermosCommand() {
         super(NAME);
 
         StringBuilder builder = new StringBuilder();
         builder.append(String.format("-------------------[" + ChatColor.RED + "Thermos" + ChatColor.RESET + "]-------------------\n"));
+        builder.append(String.format("/%s check - Check for an update.\n", NAME));
         builder.append(String.format("/%s tps - Show tps statistics.\n", NAME));
         builder.append(String.format("/%s restart - Restart the server.\n", NAME));
         builder.append(String.format("/%s dump - Dump statistics into a thermos.dump file.\n", NAME));
@@ -61,7 +64,6 @@ public class ThermosCommand extends Command {
         return false;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         if (!testPermission(sender))
@@ -72,7 +74,12 @@ public class ThermosCommand extends Command {
             return true;
         }
         String action = args[0];
-        if ("tps".equals(action)) {
+        if ("check".equals(action)) {
+            if (!testPermission(sender, CHECK))
+                return true;
+            sender.sendMessage(ChatColor.RED + "[Thermos] " + ChatColor.GRAY + "Initiated version check...");
+            TVersionRetriever.startServer(new CommandSenderUpdateCallback(sender), false);
+        } else if ("tps".equals(action)) {
             if (!testPermission(sender, TPS))
                 return true;
             World currentWorld = null;
@@ -156,6 +163,7 @@ public class ThermosCommand extends Command {
                         if (chunk == null)
                             continue;
                         writer.write(String.format("Chunk at (%d;%d)\n", x, z));
+                        @SuppressWarnings("unchecked")
                         List<NextTickListEntry> updates = world.getPendingBlockUpdates(chunk, false);
                         writer.write("Pending block updates [" + updates.size() + "]:\n");
                         for (NextTickListEntry entry : updates) {

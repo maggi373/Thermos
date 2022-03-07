@@ -1,0 +1,38 @@
+language: java
+os: linux
+dist: trusty
+jdk: oraclejdk8
+git:
+  depth: false
+
+cache:
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/build/distributions/"
+  - "$HOME/release/"
+
+before_install: git submodule update --init --recursive
+
+install: echo "Ready to Build Thermos!"
+
+before_script: 
+ - find .
+ - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+
+before_cache:
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+script: "./travii/make.sh"
+
+deploy:
+  provider: releases
+  token: $GITHUB_TOKEN
+  file_glob: true
+  file: "$HOME/release/*"
+  cleanup: false
+  draft: false
+  on:
+    repo: MCImaginarium/Thermos
+    tags: yes
+

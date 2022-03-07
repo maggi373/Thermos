@@ -1,6 +1,6 @@
 --- ../src-base/minecraft/org/bukkit/entity/Entity.java
 +++ ../src-work/minecraft/org/bukkit/entity/Entity.java
-@@ -291,4 +291,22 @@
+@@ -295,4 +295,22 @@
       * @return The current vehicle.
       */
      public Entity getVehicle();

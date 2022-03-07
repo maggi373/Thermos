@@ -5,7 +5,7 @@
  
          if (args.length == 0) {
 -            sender.sendMessage("This server is running " + Bukkit.getName() + " version " + Bukkit.getVersion() + " (Implementing API version " + Bukkit.getBukkitVersion() + ")");
-+            sender.sendMessage("This server is running Thermos | https://github.com/jefgen/Thermos | " + Bukkit.getBukkitVersion() + " | " + Bukkit.getVersion());
++            sender.sendMessage("This server is running " + Bukkit.getName() + " | https://github.com/MCImaginarium/Thermos | Implementing the Bukkit API version " + Bukkit.getVersion());
          } else {
 -            StringBuilder name = new StringBuilder();
  
@@ -44,7 +44,7 @@
      }
  
      private void describeToSender(Plugin plugin, CommandSender sender) {
-+	sender.sendMessage("Author: Fracica");
++	sender.sendMessage("Authors: McImaginarium");
 +/*
          PluginDescriptionFile desc = plugin.getDescription();
          sender.sendMessage(ChatColor.GREEN + desc.getName() + ChatColor.WHITE + " version " + ChatColor.GREEN + desc.getVersion());
@@ -60,7 +60,7 @@
 -        StringBuilder result = new StringBuilder();
 -        List<String> authors = desc.getAuthors();
 -
-+        return "Fracica";
++        return "McImaginarium";
 +/*
          for (int i = 0; i < authors.size(); i++) {
              if (result.length() > 0) {

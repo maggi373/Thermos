@@ -116,7 +116,7 @@
 +        // Thermos don't light modded chunks
 +        boolean modFlag = false;
 +        try { if (chunk.worldObj.isModded == null) chunk.worldObj.isModded = false; modFlag = chunk.worldObj.isModded;} catch(Exception e){}
-+        
++
 +        if (chunk != null && (chunk.worldObj.spigotConfig.useAsyncLighting && !modFlag) && (chunk.pendingLightUpdates.get() > 0 || chunk.worldObj.getTotalWorldTime() - chunk.lightUpdateTime < 20)) {
 +            return;
 +        }
@@ -300,13 +300,13 @@
 +        {
 +            return chunk;
 +        }
-+        
++
 +        if (chunk == null)
 +        {
 +        	logger.error("Provided chunk is null for (" +p_73154_1_ + ", " + p_73154_2_+") !");
 +        	return null;
 +        }
-+        
++
 +        try
 +        {
 +        	worldObj.isProfilingWorld();
@@ -315,7 +315,7 @@
 +        {
 +        	return chunk;
 +        }
-+        
++
 +        if ((p_73154_1_ != chunk.xPosition || p_73154_2_ != chunk.zPosition) && !worldObj.isProfilingWorld())
 +        {
 +            logger.error("Chunk (" + chunk.xPosition + ", " + chunk.zPosition + ") stored at  (" + p_73154_1_ + ", " + p_73154_2_ + ") in world '" + worldObj.getWorld().getName() + "'");
@@ -488,8 +488,8 @@
 -                        if(loadedChunks.size() == 0 && ForgeChunkManager.getPersistentChunksFor(this.worldObj).size() == 0 && !DimensionManager.shouldLoadSpawn(this.worldObj.provider.dimensionId)){
 -                            DimensionManager.unloadWorld(this.worldObj.provider.dimensionId);
 -                            return currentChunkProvider.unloadQueuedChunks();
-+                // Cauldron static - check if the chunk was accessed recently and keep it loaded if there are players in world
-+                if (!shouldUnloadChunk(chunk) && this.worldObj.playerEntities.size() > 0)
++                // Cauldron static - keep chunk loaded if there was recent activity and grace period is set
++                if (!shouldUnloadChunk(chunk))
 +                {
 +                    CauldronHooks.logChunkUnload(this, chunk.xPosition, chunk.zPosition, "** Chunk kept from unloading due to recent activity");
 +                    continue;

@@ -22,6 +22,7 @@
      {
          Loader.instance().serverStarted();
          sidedDelegate.allowLogins();
++        thermos.updater.TVersionRetriever.init(MinecraftServer.getServer());
      }
  
      public void handleServerStopping()
