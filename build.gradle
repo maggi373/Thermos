@@ -116,6 +116,7 @@ ext.mcVersion = minecraft.version
 ext.forgeVersion = VersionParser.parseForgeVersion(file('forge/src/main/java/net/minecraftforge/common/ForgeVersion.java'), file('src/main/resources/fmlversion.properties'))
 ext.nextRevisionNumber = buildInfo('nextRevisionNumber')
 
+/*
 if (isOfficial() && isTravis()) {
 	ext.nextBuildNumber = System.getenv('TRAVIS_BUILD_NUMBER')
 }
@@ -125,6 +126,7 @@ else if (isOfficial() == false && isTravis()) {
 else {
 	ext.nextBuildNumber = 'SNAPSHOT'
 }
+*/
 
 version = "${mcVersion}-${forgeVersion}-${nextRevisionNumber}-${nextBuildNumber}"
 
