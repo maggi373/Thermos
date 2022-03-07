@@ -224,7 +224,7 @@ def generateManifest() {
 tasks.packageUniversal {
     classifier = 'server'
     setManifest {}
-    manifest.attributes(generateManifest(true))
+    manifest.attributes(generateManifest())
 }
 
 task jar(type: Jar, dependsOn: packageUniversal) {
