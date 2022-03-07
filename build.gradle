@@ -115,6 +115,7 @@ ext.gitHash = gitInfo("hash")
 ext.mcVersion = minecraft.version
 ext.forgeVersion = VersionParser.parseForgeVersion(file('forge/src/main/java/net/minecraftforge/common/ForgeVersion.java'), file('src/main/resources/fmlversion.properties'))
 ext.nextRevisionNumber = buildInfo('nextRevisionNumber')
+ext.nextBuildNumber = buildInfo('nextBuildNumber')
 
 /*
 if (isOfficial() && isTravis()) {
