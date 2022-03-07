@@ -299,7 +299,7 @@ tasks.withType(Zip) { task ->
     }
 }
 
-/*
+
 task signPom(type: Sign, dependsOn: 'generatePomFileForMavenPublication') {
     outputs.upToDateWhen { false }
     sign file("${buildDir}/publications/maven/pom-default.xml")
@@ -402,7 +402,7 @@ publishing {
         }
     }
 }
-*/
+
 
 tasks.generateProjectCauldron << {
     def file = new File('eclipse/cauldron/build.gradle')
