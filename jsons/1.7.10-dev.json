@@ -206,7 +206,7 @@
       "serverreq":true
     },
     {
-      "name": "mysql:mysql-connector-java:5.1.14",
+      "name": "mysql:mysql-connector-java:8.0.28",
       "url" : "http://repo.maven.apache.org/maven2",
       "serverreq":true
     },
