@@ -49,7 +49,7 @@ def buildInfo(String key) {
     if (!buildInfoCached) {
         buildInfoCached = [
                 nextBuildNumber: 'Thorfusion',
-                version        : 'R64'
+                version        : 'R63'
         ]
     }
     return key ? buildInfoCached[key] : buildInfoCached
