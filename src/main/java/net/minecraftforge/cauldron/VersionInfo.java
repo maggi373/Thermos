@@ -15,8 +15,6 @@ import com.google.common.base.Splitter;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.io.ByteStreams;
-import com.google.common.io.Files;
-import com.google.common.io.OutputSupplier;
 
 public class VersionInfo {
     public static final VersionInfo INSTANCE = new VersionInfo();
