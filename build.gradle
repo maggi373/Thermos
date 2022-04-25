@@ -1,5 +1,3 @@
-import thermos.VersionParser
-
 buildscript {
     repositories {
         maven {
@@ -11,7 +9,7 @@ buildscript {
             url 'https://maven.thorfusion.com/artifactory/forge/'
         }
         maven {
-            name 'forge'
+            name 'thorfusion'
             url 'https://maven.thorfusion.com/artifactory/thorfusion/'
         }
     }
@@ -22,6 +20,8 @@ buildscript {
 
 apply plugin: 'maven'
 apply plugin: 'cauldron'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 repositories {
     maven {
