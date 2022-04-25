@@ -28,6 +28,6 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build workspace
-      run: ./gradlew setupThermos
+      run: ./gradlew setupThermos --info
     - name: Build with Gradle
-      run: ./gradlew jar
+      run: ./gradlew jar --info
