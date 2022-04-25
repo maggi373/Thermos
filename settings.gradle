@@ -1,5 +1,4 @@
 rootProject.name = 'Thermos'
 
-include ':eclipse:Cauldron'
 include ':eclipse:cauldron'
 include ':eclipse:Clean'
