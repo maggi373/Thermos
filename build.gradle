@@ -2,17 +2,21 @@ import thermos.VersionParser
 
 buildscript {
     repositories {
-    maven {
-        name 'central'
-        url 'https://maven.thorfusion.com/artifactory/central/'
-    }
-        flatDir {
-			dirs 'libraries'
-		}
+        maven {
+            name 'github'
+            url 'https://maven.thorfusion.com/artifactory/github/'
+        }
+        maven {
+            name 'forge'
+            url 'https://maven.thorfusion.com/artifactory/forge/'
+        }
+        maven {
+            name 'forge'
+            url 'https://maven.thorfusion.com/artifactory/thorfusion/'
+        }
     }
     dependencies {
-//        classpath files('FGS.jar')
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-1.5.30-SNAPSHOT'
     }
 }
 
@@ -20,13 +24,21 @@ apply plugin: 'maven'
 apply plugin: 'cauldron'
 
 repositories {
-    clear()
     maven {
-        name 'central'
-        url 'https://maven.thorfusion.com/artifactory/central/'
+        name 'github'
+        url 'https://maven.thorfusion.com/artifactory/github/'
     }
-    flatDir {
-        dirs 'libraries'
+    maven {
+        name 'githubthermos'
+        url 'https://maven.thorfusion.com/artifactory/githubthermos/'
+    }
+    maven {
+        name 'forge'
+        url 'https://maven.thorfusion.com/artifactory/forge/'
+    }
+    maven {
+        name 'minecraft'
+        url 'https://maven.thorfusion.com/artifactory/minecraft/'
     }
 }
 
@@ -44,16 +56,6 @@ minecraft {
 group = 'Thorfusion'
 
 ext.buildInfoCached = null
-
-def buildInfo(String key) {
-    if (!buildInfoCached) {
-        buildInfoCached = [
-                nextBuildNumber: 'Thorfusion',
-                version        : 'R63'
-        ]
-    }
-    return key ? buildInfoCached[key] : buildInfoCached
-}
 
 ext.gitInfoCached = null
 
@@ -79,10 +81,11 @@ def gitInfo(String key) {
 }
 
 ext.mcVersion = "1.7.10"
-ext.forgeVersion = VersionParser.parseForgeRevision(file('src/main/resources/fmlversion.properties'))
-ext.revision = project.hasProperty('revision') ? project.getProperty('revision') : buildInfo('nextBuildNumber')
+ext.forgeVersion = "1614"
+ext.revision = "R63-Thorfusion"
 version = "${mcVersion}-${forgeVersion}.${revision}"
-if (project.hasProperty('officialBuild')) println "Updated Thermos version: ${version}"
+
+System.setProperty("file.encoding", "UTF-8")
 
 launch4j {
     jreMinVersion = '1.8.0'
@@ -142,7 +145,11 @@ dependencies {
 
 
 packageUniversal {
-    from { configurations.exported.collect { it.isDirectory() ? it : zipTree(it) } }
+    from {
+        configurations.exported.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
 }
 
 def String repeat(String string, int times) {
@@ -151,11 +158,11 @@ def String repeat(String string, int times) {
     builder as String
 }
 
-def generateClasspath() {
+def generateClasspath(boolean legacy = false) {
     def classpath = ''
     configurations.libraries.resolvedConfiguration.resolvedArtifacts.collect { it.moduleVersion.id }.each {
         def jar = "${it.group.replace('.', '/')}/${it.name}/${it.version}/${it.name}-${it.version}.jar"
-        classpath += " ${'libraries/'}${jar}"
+        classpath += " ${legacy ? 'libraries/' : repeat('../', (group as String).split('\\.').length + 2)}${jar}"
     }
     return classpath.trim()
 }
@@ -175,7 +182,7 @@ def generateManifest() {
             'Specification-Vendor'  : 'Bukkit Team',
             'Specification-Title'   : 'Bukkit',
             'Specification-Version' : '1.7.10-R0.1-SNAPSHOT',
-            'Forge-Version'         : VersionParser.parseForgeVersion(file('forge/src/main/java/net/minecraftforge/common/ForgeVersion.java'), file('src/main/resources/fmlversion.properties')),
+            'Forge-Version'         : '10.13.4.1614',
             'TweakClass'            : 'cpw.mods.fml.common.launcher.FMLTweaker',
             'Main-Class'            : 'cpw.mods.fml.relauncher.ServerLaunchWrapper',
             'Class-Path'            : generateClasspath()
@@ -189,44 +196,69 @@ tasks.packageUniversal {
     manifest.attributes(generateManifest())
 }
 
-task jar(type: Jar, dependsOn: packageUniversal) {
+task copyLibraries(type: Copy) {
+    outputs.upToDateWhen { false }
+    into(buildDir)
+    configurations.libraries.resolvedConfiguration.resolvedArtifacts.collect {
+        def moduleVersion = it.moduleVersion
+        from (it.file) {
+            into ("libraries/${moduleVersion.id.group.replace('.', '/')}/${moduleVersion.id.name}/${moduleVersion.id.version}/")
+        }
+    }
+}
+
+task packageLibraries(type: Zip, dependsOn: copyLibraries) {
+    outputs.upToDateWhen { false }
+    setArchiveName("libraries.zip")
+    setDestinationDir(file("$buildDir/distributions"))
+    from("$buildDir/libraries")
+}
+
+task jar(type: Jar, dependsOn: [packageUniversal, packageLibraries]) {
     destinationDir file("${buildDir}/distributions")
     from zipTree(tasks.packageUniversal.archivePath)
     manifest.attributes(generateManifest())
 }
 
-
-task bundleStub(type: Jar) {
-    classifier = 'stub'
-    manifest.attributes([
-            'Main-Class': 'cpw.mods.fml.relauncher.ServerLaunchWrapper',
-            'Class-Path': "bin/${project.group.replace('.', '/')}/${project.name}/${project.version}/${project.name}-${project.version}.jar"
-    ])
-}
-
-task packageBundle(type: Zip) {
-    classifier = 'bundle'
-    from fileTree("libraries")
-    from bundleStub
-    rename bundleStub.archiveName, 'Thermos.jar'
-}
-
 tasks.createChangelog.onlyIf { false }
 tasks.packageInstaller.onlyIf { false }
 
-tasks.generateProjectCauldron << {
-    def file = new File('eclipse/cauldron/build.gradle')
+tasks.getByName("generateProjectCauldron") {
+    doLast {
+        def file = new File('eclipse/cauldron/build.gradle')
+        writeToBuildFile(file)
+    }
+}
+tasks.getByName("generateProjectClean") {
+    doLast {
+        def file = new File('eclipse/Clean/build.gradle')
+        writeToBuildFile(file)
+    }
+}
+
+def writeToBuildFile(file) {
     file.append('''
 repositories {
     clear()
     maven {
-        name 'central'
-        url 'https://maven.thorfusion.com/artifactory/central/'
+        name 'github'
+        url 'https://maven.thorfusion.com/artifactory/github/'
     }
-    flatDir {
-        dirs '../../libraries'
+    maven {
+        name 'githubthermos'
+        url 'https://maven.thorfusion.com/artifactory/githubthermos/'
+    }
+    maven {
+        name 'forge'
+        url 'https://maven.thorfusion.com/artifactory/forge/'
+    }
+    maven {
+        name 'minecraft'
+        url 'https://maven.thorfusion.com/artifactory/minecraft/'
     }
 }
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 dependencies {
 ''')
     configurations.libraries.resolvedConfiguration.resolvedArtifacts.collect { it.moduleVersion.id }.each { module ->
@@ -241,5 +273,17 @@ dependencies {
 task resolveAllDependencies {
     doLast {
         configurations.each { it.resolve() }
+    }
+}
+
+task copyLibs( type: Copy ) {
+    into "$buildDir/libs/lib"
+    from configurations.libraries
+}
+
+subprojects {
+    apply plugin: 'java'
+    repositories {
+        mavenCentral()
     }
 }

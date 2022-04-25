@@ -12,11 +12,6 @@
 name: "CodeQL"
 
 on:
-  push:
-    branches: [ 1.7.10 ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ 1.7.10 ]
   schedule:
     - cron: '25 9 * * 0'
 
@@ -63,7 +58,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew setupCauldron jar
+      run: ./gradlew setupThermos jar
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
