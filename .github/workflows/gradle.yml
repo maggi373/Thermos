@@ -26,8 +26,8 @@ jobs:
         java-version: '8'
         distribution: 'adopt'
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: chmod +x ./gradlew
     - name: Build workspace
-      run: gradle setupThermos --info
+      run: ./gradlew setupThermos --info
     - name: Build with Gradle
-      run: gradle jar --info
+      run: ./gradlew jar --info
