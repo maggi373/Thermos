@@ -82,7 +82,7 @@ def gitInfo(String key) {
 
 ext.mcVersion = "1.7.10"
 ext.forgeVersion = "1614"
-ext.revision = "R63-Thorfusion"
+ext.revision = "R64-Thorfusion"
 version = "${mcVersion}-${forgeVersion}.${revision}"
 
 System.setProperty("file.encoding", "UTF-8")
@@ -169,7 +169,7 @@ def generateClasspath(boolean legacy = false) {
 
 
 
-def generateManifest() {
+def generateManifest(boolean legacy = false) {
     [
             'Thermos-Git-Branch'    : gitInfo('branch'),
             'Thermos-Git-Hash'      : gitInfo('fullHash'),
@@ -185,7 +185,7 @@ def generateManifest() {
             'Forge-Version'         : '10.13.4.1614',
             'TweakClass'            : 'cpw.mods.fml.common.launcher.FMLTweaker',
             'Main-Class'            : 'cpw.mods.fml.relauncher.ServerLaunchWrapper',
-            'Class-Path'            : generateClasspath()
+            'Class-Path'            : generateClasspath(legacy)
     ]
 }
 
@@ -193,7 +193,7 @@ def generateManifest() {
 tasks.packageUniversal {
     classifier = 'server'
     setManifest {}
-    manifest.attributes(generateManifest())
+    manifest.attributes(generateManifest(true))
 }
 
 task copyLibraries(type: Copy) {
