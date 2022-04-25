@@ -12,6 +12,10 @@ buildscript {
             name 'thorfusion'
             url 'https://maven.thorfusion.com/artifactory/thorfusion/'
         }
+        maven {
+            name 'central'
+            url 'https://maven.thorfusion.com/artifactory/central/'
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-1.5.30-SNAPSHOT'
@@ -40,6 +44,11 @@ repositories {
         name 'minecraft'
         url 'https://maven.thorfusion.com/artifactory/minecraft/'
     }
+    maven {
+        name 'central'
+        url 'https://maven.thorfusion.com/artifactory/central/'
+    }
+    mavenCentral()
 }
 
 archivesBaseName = "Thermos"
@@ -255,6 +264,10 @@ repositories {
     maven {
         name 'minecraft'
         url 'https://maven.thorfusion.com/artifactory/minecraft/'
+    }
+    maven {
+            name 'central'
+            url 'https://maven.thorfusion.com/artifactory/central/'
     }
 }
 sourceCompatibility = 1.8
