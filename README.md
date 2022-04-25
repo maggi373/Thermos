@@ -51,7 +51,7 @@ Advantages over KCauldron:
   * If you have gradle integration in IDE - you can still use gui
   * Auto: `build.sh`
   * Manual:
-  `./gradlew setupCauldron jar`
+  `./gradlew setupThermos jar`
 
 All builds will be in `build/distributions`
   
