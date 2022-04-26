@@ -16,14 +16,6 @@
  */
 package org.apache.logging.log4j.core.appender;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Constructor;
-import java.nio.charset.Charset;
-
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
@@ -34,6 +26,10 @@ import org.apache.logging.log4j.core.helpers.Booleans;
 import org.apache.logging.log4j.core.helpers.Loader;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.apache.logging.log4j.util.PropertiesUtil;
+
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.nio.charset.Charset;
 
 /**
  * ConsoleAppender appends log events to <code>System.out</code> or

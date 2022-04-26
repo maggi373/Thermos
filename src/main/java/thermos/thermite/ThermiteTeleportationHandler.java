@@ -1,9 +1,5 @@
 package thermos.thermite;
 
-import java.util.Iterator;
-
-import org.bukkit.World.Environment;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
@@ -20,6 +16,9 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.network.ForgeMessage;
 import net.minecraftforge.common.network.ForgeNetworkHandler;
+import org.bukkit.World.Environment;
+
+import java.util.Iterator;
 
 public class ThermiteTeleportationHandler {
 	public static void transferEntityToDimension(Entity ent, int dim, ServerConfigurationManager manager, Environment environ) {

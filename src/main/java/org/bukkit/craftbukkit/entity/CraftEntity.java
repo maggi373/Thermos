@@ -1,9 +1,10 @@
 package org.bukkit.craftbukkit.entity;
 
-import java.util.List;
-import java.util.UUID;
-
-
+import net.minecraft.entity.Entity;
+import net.minecraftforge.cauldron.entity.CraftCustomEntity;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -16,13 +17,9 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-// Cauldron start
+import java.util.List;
 import java.util.Map;
-import net.minecraft.entity.Entity;
-import net.minecraftforge.cauldron.entity.CraftCustomEntity;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.common.util.FakePlayerFactory;
+import java.util.UUID;
 // Cauldron end
 
 public abstract class CraftEntity implements org.bukkit.entity.Entity {

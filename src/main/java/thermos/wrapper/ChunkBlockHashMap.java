@@ -1,10 +1,10 @@
 package thermos.wrapper;
 
-import java.util.Collection;
-
 import com.koloboke.collect.map.LongObjMap;
 import com.koloboke.collect.map.hash.HashLongObjMaps;
 import net.minecraft.world.chunk.Chunk;
+
+import java.util.Collection;
 
 public class ChunkBlockHashMap {
 

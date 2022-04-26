@@ -1,13 +1,12 @@
 package org.bukkit.craftbukkit.generator;
 
+import net.minecraft.world.chunk.IChunkProvider;
+import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.generator.BlockPopulator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import net.minecraft.world.chunk.IChunkProvider; // Cauldron
-
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.generator.BlockPopulator;
 
 public class NormalChunkGenerator extends InternalChunkGenerator {
     private final net.minecraft.world.chunk.IChunkProvider provider;

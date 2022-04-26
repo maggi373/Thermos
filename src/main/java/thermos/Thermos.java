@@ -1,16 +1,13 @@
 package thermos;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import org.spigotmc.RestartCommand;
+
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.Properties;
-
-import org.spigotmc.RestartCommand;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
 
 public class Thermos {
     public static final ThreadGroup sThermosThreadGroup = new ThreadGroup("Thermos");

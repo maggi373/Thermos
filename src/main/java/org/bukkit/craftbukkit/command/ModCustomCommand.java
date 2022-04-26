@@ -1,12 +1,9 @@
 package org.bukkit.craftbukkit.command;
 
-import java.util.List;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import net.minecraft.command.ICommand;
-import net.minecraft.command.ICommandSender;
+import java.util.List;
 
 public class ModCustomCommand extends Command {
 

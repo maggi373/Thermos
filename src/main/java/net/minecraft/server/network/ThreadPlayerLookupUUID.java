@@ -1,19 +1,16 @@
 package net.minecraft.server.network;
 
-import java.math.BigInteger;
-import java.util.UUID;
-
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.exceptions.AuthenticationUnavailableException;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.NetHandlerLoginServer.LoginState;
 import net.minecraft.util.CryptManager;
-
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.exceptions.AuthenticationUnavailableException;
-
-// CraftBukkit start
 import org.bukkit.craftbukkit.util.Waitable;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerPreLoginEvent;
+
+import java.math.BigInteger;
+import java.util.UUID;
 // CraftBukkit end
 
 class ThreadPlayerLookupUUID extends Thread

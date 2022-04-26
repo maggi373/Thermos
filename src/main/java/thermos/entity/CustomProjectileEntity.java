@@ -1,25 +1,21 @@
 package thermos.entity;
 
-import java.util.UUID;
-
+import com.mojang.authlib.GameProfile;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.ItemInWorldManager;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.cauldron.entity.CraftCustomEntity;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
-import org.bukkit.projectiles.*;
+import org.bukkit.projectiles.BlockProjectileSource;
+import org.bukkit.projectiles.ProjectileSource;
 
-import com.mojang.authlib.GameProfile;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.ItemInWorldManager;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.cauldron.entity.CraftCustomEntity;
+import java.util.UUID;
 
 public class CustomProjectileEntity extends CraftCustomEntity implements Projectile {
     private ProjectileSource shooter = null;

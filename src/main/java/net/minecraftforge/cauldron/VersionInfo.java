@@ -1,22 +1,15 @@
 package net.minecraftforge.cauldron;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import argo.jdom.JdomParser;
 import argo.jdom.JsonNode;
 import argo.jdom.JsonRootNode;
-
 import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.io.ByteStreams;
-import com.google.common.io.Files;
-import com.google.common.io.OutputSupplier;
+
+import java.io.*;
 
 public class VersionInfo {
     public static final VersionInfo INSTANCE = new VersionInfo();

@@ -1,12 +1,11 @@
 package org.bukkit.craftbukkit.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.block.CraftBlockState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockStateListPopulator {
     private final World world;

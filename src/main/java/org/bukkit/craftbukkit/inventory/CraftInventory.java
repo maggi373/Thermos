@@ -1,19 +1,17 @@
 package org.bukkit.craftbukkit.inventory;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-
-
 import net.minecraftforge.cauldron.CauldronUtils;
-
 import org.apache.commons.lang.Validate;
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.Material;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
 
 
 public class CraftInventory implements Inventory {
