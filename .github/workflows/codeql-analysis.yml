@@ -47,7 +47,7 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - uses: actions/checkout@v2
+
     - name: include stub submodule to base repo
       run: git submodule update --init
     - name: Set up JDK 8
@@ -57,8 +57,10 @@ jobs:
         distribution: 'adopt'
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Build workspace
+      run: ./gradlew setupThermos --info
     - name: Build with Gradle
-      run: ./gradlew setupThermos jar
+      run: ./gradlew jar --info
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
